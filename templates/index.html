@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>RNS Scraper</title>
+    <style>
+td {font-size: 20;}
+</style>
+  </head>
+  <body>
+    <form class="form" id="Form1" action="." method="post">
+    <div class="" id="tickers">
+    <div class="ticker0">
+    <table style="margin-top:15px;">
+      <col width="220">
+      <col width="100">
+      <tr>
+        <td><label for="tickerOrName">Ticker or name:</label></td>
+        <td><input type="text" name="tickers[]" value="" id="tickerOrName"></td>
+      </tr>
+    </table>
+    </div>
+    </div>
+    <h6 style="display:inline; margin-left:300px;">Add</h5>
+    <button type="button" name="button" onclick="addTicker()">+</button>
+    <br>
+    <br>
+    <button type="submit" form="Form1" value="Submit">Submit</button>
+    <br>
+  </form>
+  {% if ticker_dict is defined %}
+  {%for i in ticker_dict%}
+    <table style="margin-top:15px;">
+      <tr>
+        <th>News for {{i}}</th>
+      </tr>
+      {%for j in ticker_dict[i]%}
+      <tr>
+        <td>{{j[0]}}</td>
+        <td>
+          <a href="{{j[1]}}">{{j[1]}}</a>
+        </td>
+      </tr>
+      {%endfor%}
+    {%endfor%}
+    {% endif %}
+
+    </table>
+
+
+
+  </body>
+
+
+</html>
+<script type="text/javascript">
+
+function addTicker(){
+  var tickers = document.getElementById("tickers")
+  var divcount = tickers.getElementsByTagName("div")
+  var xcount = divcount.length
+  const e = document.createElement("div");
+  e.className = "ticker" + xcount;
+  e.innerHTML += '<table style="margin-top:15px;">' +
+    '<col width="220">' +
+    '<col width="100">' +
+    '<tr>' +
+      '<td><label for="tickerOrName"></label></td>'+
+      '<td><input type="text" name="tickers[]" value="" id="tickerOrName"></td>'+
+    '</tr>'+
+  '</table>'
+  tickers.appendChild(e)
+}
+
+</script>
